@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        #map {
+            width: 1620px;
+            height: 901px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/municipios_0.js"></script>
+        <script src="data/rios_1.js"></script>
+        <script src="data/cerros_2.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[13.089081426210335,-90.19320695622494],[14.517374836789763,-87.62259656877498]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        function pop_municipios_0(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NOM_DPTO</strong><br />' + (feature.properties['NOM_DPTO'] !== null ? autolinker.link(feature.properties['NOM_DPTO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['COD_DPTO'] !== null ? autolinker.link(feature.properties['COD_DPTO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NOM_MUN</th>\
+                        <td>' + (feature.properties['NOM_MUN'] !== null ? autolinker.link(feature.properties['NOM_MUN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['COD_MUN'] !== null ? autolinker.link(feature.properties['COD_MUN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['COD_MUN4'] !== null ? autolinker.link(feature.properties['COD_MUN4'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['TASA_POBR'] !== null ? autolinker.link(feature.properties['TASA_POBR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['POBR_FISDL'] !== null ? autolinker.link(feature.properties['POBR_FISDL'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PERIM_KM'] !== null ? autolinker.link(feature.properties['PERIM_KM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['AREA_KM2'] !== null ? autolinker.link(feature.properties['AREA_KM2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['POB_TOTAL'] !== null ? autolinker.link(feature.properties['POB_TOTAL'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['POB_HOMB'] !== null ? autolinker.link(feature.properties['POB_HOMB'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['POB_MUJER'] !== null ? autolinker.link(feature.properties['POB_MUJER'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Leng'] !== null ? autolinker.link(feature.properties['Shape_Leng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Area'] !== null ? autolinker.link(feature.properties['Shape_Area'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_municipios_0_0() {
+            return {
+                pane: 'pane_municipios_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(199,213,195,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_municipios_0');
+        map.getPane('pane_municipios_0').style.zIndex = 400;
+        map.getPane('pane_municipios_0').style['mix-blend-mode'] = 'normal';
+        var layer_municipios_0 = new L.geoJson(json_municipios_0, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_municipios_0',
+            layerName: 'layer_municipios_0',
+            pane: 'pane_municipios_0',
+            onEachFeature: pop_municipios_0,
+            style: style_municipios_0_0,
+        });
+        bounds_group.addLayer(layer_municipios_0);
+        map.addLayer(layer_municipios_0);
+        function pop_rios_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['F_CODE'] !== null ? autolinker.link(feature.properties['F_CODE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['F_CODE_DES'] !== null ? autolinker.link(feature.properties['F_CODE_DES'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ACC'] !== null ? autolinker.link(feature.properties['ACC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ACC_DESC'] !== null ? autolinker.link(feature.properties['ACC_DESC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['HIC'] !== null ? autolinker.link(feature.properties['HIC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['HIC_DESC'] !== null ? autolinker.link(feature.properties['HIC_DESC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NOM</strong><br />' + (feature.properties['NOM'] !== null ? autolinker.link(feature.properties['NOM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['EXS'] !== null ? autolinker.link(feature.properties['EXS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['EXS_DESC'] !== null ? autolinker.link(feature.properties['EXS_DESC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Shape_Leng</th>\
+                        <td>' + (feature.properties['Shape_Leng'] !== null ? autolinker.link(feature.properties['Shape_Leng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_rios_1_0() {
+            return {
+                pane: 'pane_rios_1',
+                opacity: 1,
+                color: 'rgba(28,8,182,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_rios_1');
+        map.getPane('pane_rios_1').style.zIndex = 401;
+        map.getPane('pane_rios_1').style['mix-blend-mode'] = 'normal';
+        var layer_rios_1 = new L.geoJson(json_rios_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_rios_1',
+            layerName: 'layer_rios_1',
+            pane: 'pane_rios_1',
+            onEachFeature: pop_rios_1,
+            style: style_rios_1_0,
+        });
+        bounds_group.addLayer(layer_rios_1);
+        map.addLayer(layer_rios_1);
+        function pop_cerros_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NOM'] !== null ? autolinker.link(feature.properties['NOM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">TIPO</th>\
+                        <td>' + (feature.properties['TIPO'] !== null ? autolinker.link(feature.properties['TIPO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NOMBRE</strong><br />' + (feature.properties['NOMBRE'] !== null ? autolinker.link(feature.properties['NOMBRE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ALT_MSNM'] !== null ? autolinker.link(feature.properties['ALT_MSNM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NOM_DPTO'] !== null ? autolinker.link(feature.properties['NOM_DPTO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">COD_DPTO</th>\
+                        <td>' + (feature.properties['COD_DPTO'] !== null ? autolinker.link(feature.properties['COD_DPTO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NOM_MUN'] !== null ? autolinker.link(feature.properties['NOM_MUN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['COD_MUN'] !== null ? autolinker.link(feature.properties['COD_MUN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['COD_MUN4'] !== null ? autolinker.link(feature.properties['COD_MUN4'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_cerros_2_0() {
+            return {
+                pane: 'pane_cerros_2',
+                radius: 2.4,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,232,22,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_cerros_2');
+        map.getPane('pane_cerros_2').style.zIndex = 402;
+        map.getPane('pane_cerros_2').style['mix-blend-mode'] = 'normal';
+        var layer_cerros_2 = new L.geoJson(json_cerros_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_cerros_2',
+            layerName: 'layer_cerros_2',
+            pane: 'pane_cerros_2',
+            onEachFeature: pop_cerros_2,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_cerros_2_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_cerros_2);
+        map.addLayer(layer_cerros_2);
+        setBounds();
+        </script>
+    </body>
+</html>
